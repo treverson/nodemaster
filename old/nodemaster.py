@@ -1,9 +1,10 @@
-#!/usr/bin/env python
-
-"""
 ################################################################################
 #                                                                              #
 # nodemaster                                                                   #
+#                                                                              #
+################################################################################
+#                                                                              #
+# version: 2014-08-28T1736                                                     #
 #                                                                              #
 ################################################################################
 #                                                                              #
@@ -11,7 +12,7 @@
 #                                                                              #
 # This program provides node control utilities.                                #
 #                                                                              #
-# 2014 Will Breaden Madden, w.bm@cern.ch                                       #
+# copyright (C) 2014 William Breaden Madden                                    #
 #                                                                              #
 # This software is released under the terms of the GNU General Public License  #
 # version 3 (GPLv3).                                                           #
@@ -23,68 +24,57 @@
 #                                                                              #
 # This program is distributed in the hope that it will be useful, but WITHOUT  #
 # ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or        #
-# FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for     #
+# FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for    #
 # more details.                                                                #
 #                                                                              #
 # For a copy of the GNU General Public License, see                            #
 # <http://www.gnu.org/licenses/>.                                              #
 #                                                                              #
 ################################################################################
-"""
 
-name    = "nodemaster"
-version = "2015-11-24T2313Z"
+import subprocess
 
-import os
+def printLine(character = '-'):
+    terminalWidth = int(subprocess.Popen(['tput', 'cols'], stdout = subprocess.PIPE).communicate()[0].strip('\n'))
+    line = ""
+    for column in range(0, terminalWidth):
+        line += character
+    print(line)
 
-def launch_tmux(
-    commands = None
+def checkServersForSSHAccess(
+    computers = None,
+    userName = None,
+    passcode = None
     ):
-    configuration =\
-    """
-    set -g set-remain-on-exit on
-    new -s "nodemaster"
-    set-option -g prefix C-a
-    unbind C-b
-    bind - split-window -v
-    bind | split-window -h
-    ## colours
-    set-option -g window-status-current-bg yellow
-    set-option -g pane-active-border-fg yellow
-    set -g status-fg black
-    set -g status-bg '#FEFE0A'
-    set -g message-fg black
-    set -g message-bg '#FEFE0A'
-    set -g message-command-fg black
-    set -g message-command-bg '#FEFE0A'
-    set-option -g mode-keys vi
-    set -g history-limit 5000
-    ## mouse mode
-    set -g mode-mouse on
-    set -g mouse-select-pane on
-    set -g mouse-select-window on
-    set -g mouse-resize-pane on # resize panes with mouse (drag borders)
-    ## status
-    set-option -g status-interval 1
-    set-option -g status-left-length 20
-    set-option -g status-left ''
-    set-option -g status-right '%Y-%m-%dT%H%M%S '
-    """
-    for command in range(1, len(commands)):
-        configuration += "\nsplit-window -v\nselect-layout even-vertical"
-    for index, command in enumerate(commands):
-        configuration += "\nselect-pane -t {index}".format(
-            index = index
-        )
-        configuration += "\nsend-keys '{command}' Enter".format(
-            command = command
-        )
-    configuration += "\nset -g set-remain-on-exit off"
-    command = \
-        "configurationtmux=\"$(mktemp)\" && { echo \"" +\
-        configuration                                  +\
-        "\" > \"${configurationtmux}\"; "              +\
-        "tmux"                                         +\
-        " -f \"${configurationtmux}\" attach; "        +\
-        "unlink \"${configurationtmux}\"; }"
-    os.system(command)
+    if passcode == None:
+        passcode = raw_input("enter passcode: ")
+    if userName == None:
+        userName = raw_input("enter passcode: ")
+    problemComputers = []
+    printLine()
+    for computer in computers:
+        print("checking computer {computer}".format(computer = computer))
+        returnCode = subprocess.call([
+            "sshpass",
+            "-p",
+            passcode,
+            "ssh",
+            "-o",
+            "StrictHostKeyChecking=no",
+            "-p",
+            "24",
+            userName + "@" + computer,
+            "uptime"
+        ])
+        print("return code: {returnCode}".format(
+            returnCode = returnCode
+        ))
+        if returnCode != 0:
+            problemComputers.append(computer)
+        printLine()
+    if problemComputers:
+        print("list of problem computers:\n{problemComputers}".format(
+            problemComputers = problemComputers
+        ))
+    else:
+        print("no problem computers found")
