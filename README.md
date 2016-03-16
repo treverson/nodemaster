@@ -15,7 +15,7 @@ commands = [
     "ls",
     "ls",
     "ls"
-}
+]
 nodemaster.launch_tmux(commands = commands)
 ```
 
@@ -28,6 +28,6 @@ commands = [
     "ssh -o StrictHostKeyChecking=no lxplus0001.cern.ch uptime",
     "ssh -o StrictHostKeyChecking=no lxplus0002.cern.ch uptime",
     "ssh -o StrictHostKeyChecking=no lxplus0003.cern.ch uptime"
-}
+]
 nodemaster.launch_tmux(commands = commands)
 ```
