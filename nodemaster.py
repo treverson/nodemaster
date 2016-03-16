@@ -33,9 +33,10 @@
 """
 
 name    = "nodemaster"
-version = "2015-11-24T2313Z"
+version = "2016-03-16T1338Z"
 
 import os
+import subprocess
 
 def launch_tmux(
     commands = None
@@ -88,3 +89,146 @@ def launch_tmux(
         " -f \"${configurationtmux}\" attach; "        +\
         "unlink \"${configurationtmux}\"; }"
     os.system(command)
+
+def working_nodes_LXPLUS(
+    number = None
+    ):
+    nodes = [
+        #"lxplus0000.cern.ch",
+        "lxplus0001.cern.ch",
+        #"lxplus0002.cern.ch",
+        #"lxplus0003.cern.ch",
+        "lxplus0004.cern.ch",
+        #"lxplus0005.cern.ch",
+        #"lxplus0006.cern.ch",
+        #"lxplus0007.cern.ch",
+        "lxplus0008.cern.ch",
+        "lxplus0009.cern.ch",
+        "lxplus0010.cern.ch",
+        "lxplus0011.cern.ch",
+        "lxplus0012.cern.ch",
+        "lxplus0013.cern.ch",
+        "lxplus0014.cern.ch",
+        "lxplus0015.cern.ch",
+        "lxplus0016.cern.ch",
+        "lxplus0017.cern.ch",
+        "lxplus0018.cern.ch",
+        "lxplus0019.cern.ch",
+        "lxplus0020.cern.ch",
+        "lxplus0021.cern.ch",
+        "lxplus0022.cern.ch",
+        "lxplus0023.cern.ch",
+        "lxplus0024.cern.ch",
+        "lxplus0025.cern.ch",
+        "lxplus0026.cern.ch",
+        "lxplus0027.cern.ch",
+        "lxplus0028.cern.ch",
+        "lxplus0029.cern.ch",
+        "lxplus0030.cern.ch",
+        "lxplus0031.cern.ch",
+        "lxplus0032.cern.ch",
+        "lxplus0033.cern.ch",
+        "lxplus0034.cern.ch",
+        "lxplus0035.cern.ch",
+        "lxplus0036.cern.ch",
+        "lxplus0037.cern.ch",
+        "lxplus0038.cern.ch",
+        "lxplus0039.cern.ch",
+        "lxplus0040.cern.ch",
+        "lxplus0041.cern.ch",
+        "lxplus0042.cern.ch",
+        "lxplus0043.cern.ch",
+        "lxplus0044.cern.ch",
+        "lxplus0045.cern.ch",
+        "lxplus0046.cern.ch",
+        "lxplus0047.cern.ch",
+        "lxplus0048.cern.ch",
+        "lxplus0049.cern.ch",
+        "lxplus0050.cern.ch",
+        "lxplus0051.cern.ch",
+        "lxplus0052.cern.ch",
+        "lxplus0053.cern.ch",
+        "lxplus0054.cern.ch",
+        "lxplus0055.cern.ch",
+        "lxplus0056.cern.ch",
+        "lxplus0057.cern.ch",
+        "lxplus0058.cern.ch",
+        "lxplus0059.cern.ch",
+        "lxplus0060.cern.ch",
+        "lxplus0061.cern.ch",
+        "lxplus0062.cern.ch",
+        "lxplus0063.cern.ch",
+        "lxplus0064.cern.ch",
+        "lxplus0065.cern.ch",
+        "lxplus0066.cern.ch",
+        "lxplus0067.cern.ch",
+        "lxplus0068.cern.ch",
+        "lxplus0069.cern.ch",
+        "lxplus0070.cern.ch",
+        "lxplus0072.cern.ch",
+        "lxplus0073.cern.ch",
+        "lxplus0074.cern.ch",
+        "lxplus0075.cern.ch",
+        "lxplus0076.cern.ch",
+        "lxplus0077.cern.ch",
+        "lxplus0078.cern.ch",
+        "lxplus0079.cern.ch",
+        "lxplus0080.cern.ch",
+        "lxplus0081.cern.ch",
+        "lxplus0082.cern.ch",
+        "lxplus0083.cern.ch",
+        "lxplus0084.cern.ch",
+        "lxplus0085.cern.ch",
+        "lxplus0086.cern.ch",
+        "lxplus0087.cern.ch",
+        "lxplus0088.cern.ch",
+        "lxplus0089.cern.ch",
+        "lxplus0090.cern.ch",
+        "lxplus0091.cern.ch",
+        "lxplus0092.cern.ch",
+        "lxplus0093.cern.ch",
+        "lxplus0094.cern.ch",
+        "lxplus0095.cern.ch",
+        "lxplus0096.cern.ch",
+        "lxplus0097.cern.ch",
+        "lxplus0098.cern.ch",
+        "lxplus0099.cern.ch",
+        "lxplus0100.cern.ch",
+        "lxplus0101.cern.ch",
+        "lxplus0102.cern.ch",
+        "lxplus0103.cern.ch",
+        "lxplus0103.cern.ch",
+        "lxplus0104.cern.ch",
+        "lxplus0105.cern.ch",
+        "lxplus0106.cern.ch",
+        "lxplus0107.cern.ch",
+        "lxplus0108.cern.ch",
+        "lxplus0109.cern.ch",
+        "lxplus0110.cern.ch",
+        "lxplus0111.cern.ch",
+        "lxplus0112.cern.ch",
+        "lxplus0113.cern.ch",
+        "lxplus0114.cern.ch",
+        "lxplus0141.cern.ch",
+        "lxplus0148.cern.ch",
+        "lxplus0159.cern.ch",
+        "lxplus0233.cern.ch"
+    ]
+    working_nodes = []
+    for node in nodes:
+        #log.debug("check node {node}".format(node = node))
+        return_code = subprocess.call([
+            "ssh",
+            "-o",
+            "StrictHostKeyChecking=no",
+            node,
+            "uptime"
+        ])
+        #log.debug("return code: {return_code}".format(
+        #    return_code = return_code
+        #))
+        if return_code == 0:
+            working_nodes.append(node)
+        if len(working_nodes) == number:
+            return working_nodes
+    return working_nodes

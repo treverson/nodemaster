@@ -31,7 +31,7 @@
 """
 
 name    = "users_LXPLUS"
-version = "2016-03-16T1333Z"
+version = "2016-03-16T1348Z"
 
 import os
 
@@ -39,13 +39,18 @@ import nodemaster
 
 def main():
 
+    print("\nLXPLUS users\n")
+    print("find working nodes\n")
+    working_nodes = nodemaster.working_nodes_LXPLUS(number = 10)
     commands = []
-    for node_index in [str(index).zfill(4) for index in range(1, 200)]:
-        command = "ssh -o StrictHostKeyChecking=no lxplus{index}.cern.ch \"echo \$HOSTNAME; users\"".format(
-            index = node_index
+    for node in working_nodes:
+        command = "ssh -o StrictHostKeyChecking=no {node} \"echo \$HOSTNAME; users\"".format(
+            node = node
         )
         commands.append(command)
+    print("\nget users on working nodes")
     for command in commands:
+        print("")
         os.system(command)
 
 if __name__ == "__main__":
