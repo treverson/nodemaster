@@ -9,7 +9,7 @@
 #                                                                              #
 # LICENCE INFORMATION                                                          #
 #                                                                              #
-# This program collates LXPLUS users.                           #
+# This program collates LXPLUS users.                                          #
 #                                                                              #
 # This software is released under the terms of the GNU General Public License  #
 # version 3 (GPLv3).                                                           #
@@ -31,7 +31,7 @@
 """
 
 name    = "users_LXPLUS"
-version = "2016-03-16T1348Z"
+version = "2016-03-16T1405Z"
 
 import os
 
