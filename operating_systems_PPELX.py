@@ -9,7 +9,9 @@
 #                                                                              #
 # LICENCE INFORMATION                                                          #
 #                                                                              #
-# This program collates LXPLUS users.                                          #
+# This program collates operating systems of PPELX nodes.                      #
+#                                                                              #
+# 2016 Will Breaden Madden, w.bm@cern.ch                                       #
 #                                                                              #
 # This software is released under the terms of the GNU General Public License  #
 # version 3 (GPLv3).                                                           #
@@ -31,7 +33,7 @@
 """
 
 name    = "operating_systems_PPELX"
-version = "2016-03-29T1527Z"
+version = "2016-03-29T1728Z"
 
 import os
 

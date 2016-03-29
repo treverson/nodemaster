@@ -11,6 +11,8 @@
 #                                                                              #
 # This program collates LXPLUS users.                                          #
 #                                                                              #
+# 2015 Will Breaden Madden, w.bm@cern.ch                                       #
+#                                                                              #
 # This software is released under the terms of the GNU General Public License  #
 # version 3 (GPLv3).                                                           #
 #                                                                              #
@@ -31,7 +33,7 @@
 """
 
 name    = "users_LXPLUS"
-version = "2016-03-16T1405Z"
+version = "2016-03-29T1728Z"
 
 import os
 
