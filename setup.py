@@ -8,7 +8,7 @@ def main():
 
     setuptools.setup(
         name             = "nodemaster",
-        version          = "2015.11.24.2313",
+        version          = "2016.03.29.1523",
         description      = "node control utilities",
         long_description = Markdown_to_reStructuredText("README.md"),
         url              = "https://github.com/wdbm/nodemaster",
