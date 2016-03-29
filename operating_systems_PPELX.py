@@ -30,8 +30,8 @@
 ################################################################################
 """
 
-name    = "users_LXPLUS"
-version = "2016-03-29T1523Z"
+name    = "operating_systems_PPELX"
+version = "2016-03-29T1527Z"
 
 import os
 
