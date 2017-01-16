@@ -33,7 +33,7 @@
 """
 
 name    = "nodemaster"
-version = "2016-03-29T1523Z"
+version = "2017-01-16T1608Z"
 
 import os
 import subprocess
